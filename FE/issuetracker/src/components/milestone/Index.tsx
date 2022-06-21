@@ -1,4 +1,3 @@
-import * as I from 'design/icons';
 import * as S from 'components/milestone/styled.index';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 
