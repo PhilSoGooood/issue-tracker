@@ -39,15 +39,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+            
+      - name: Install Dependencies # node module install
+        run: yarn
 
-      # npm ci는 npm install과 같은 기능을 수행한다. 자세한 내용은 아래 링크 참조.
-      - name: install npm dependencies
-        run: npm ci
-
-      # --if-present 옵션은 npm 스크립트가 존재할 때만 실행시키라는 의미이다.
-      # 만약 build 스크립트가 없는 경우, 오류 없이 지나간다.
-      - name: react build
-        run: npm run build --if-present
+      - name: Build # project build
+        run: yarn build
 
       # aws user 연결
       - name: Configure AWS credentials
