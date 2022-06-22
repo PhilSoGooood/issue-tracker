@@ -23,5 +23,18 @@ export const AccountImg = styled.img`
   height: 44px;
   border-radius: 100%;
 `;
-
 export default Label;
+
+export const ProgressBar = styled.div`
+  width: 244px;
+  height: 8px;
+  border-radius: 10px;
+  margin-top: 16px;
+  background: linear-gradient(
+    90deg,
+    ${({ theme }) => theme.backgroundColors.blue2} 0%,
+    ${({ theme }) => theme.backgroundColors.blue2} 15.21%,
+    ${({ theme }) => theme.backgroundColors.gray3} 15.22%,
+    ${({ theme }) => theme.backgroundColors.gray3} 100%
+  );
+`;

@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const labelListLayout = styled.div`
-  width: 1280px;
-  min-height: 367px;
+  width: 100%;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   border-radius: 16px;
   margin-top: 24px;
+  padding-bottom: 10px;
+  background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
 
 export const labelListTop = styled.div`

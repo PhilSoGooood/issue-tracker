@@ -1,8 +1,9 @@
+import Label, { AccountImg } from 'components/common/Common';
+
 import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
 
 import AccountSrc from 'assets/images/UserImageLarge.svg';
-import Label, { AccountImg } from 'components/common/Common';
 import { CheckBox } from './styled.issues';
 
 function Issue() {

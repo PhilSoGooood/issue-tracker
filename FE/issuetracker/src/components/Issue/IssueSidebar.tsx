@@ -2,6 +2,7 @@ import * as I from 'design/icons';
 import * as S from 'components/Issue/styled.issueSidebar';
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import userImageURL2 from 'assets/images/UserImageLarge2.svg';
+import { ProgressBar } from 'components/common/Common';
 
 function IssueSidebar() {
   return (
@@ -33,7 +34,7 @@ function IssueSidebar() {
             <S.barHeaderText>마일스톤</S.barHeaderText>
             <I.plus />
           </S.barHeader>
-          <S.progressBar />
+          <ProgressBar />
           <S.milstoneContent>마스터즈 코스</S.milstoneContent>
         </S.milestoneBar>
       </S.sidebar>

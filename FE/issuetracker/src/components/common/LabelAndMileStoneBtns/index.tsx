@@ -1,5 +1,5 @@
 import * as I from 'design/icons';
-import * as S from 'components/common/LabelAndMileStoneBtns/styled.index';
+import * as S from 'components/common/LabelAndMileStoneBtns/styled/styled.index';
 
 function LabelAndMileStoneBtns() {
   const isLabelPage = window.location.href === `http://localhost:3000/label`;
