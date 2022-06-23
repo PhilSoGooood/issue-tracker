@@ -32,9 +32,9 @@ jobs:
 
       - name: Insert data source information into application.yml
         run: |
-          sed -i "s|datasource_url|$DATASOURCE_URL|g" ./src/main/resources/application.yml
-          sed -i "s|datasource_username|$DATASOURCE_USERNAME|g" ./src/main/resources/application.yml
-          sed -i "s|datasource_password|$DATASOURCE_PASSWORD|g" ./src/main/resources/application.yml
+          sed -i "s|${DATASOURCE_URL}|$DATASOURCE_URL|g" ./src/main/resources/application.yml
+          sed -i "s|${DATASOURCE_USERNAME}|$DATASOURCE_USERNAME|g" ./src/main/resources/application.yml
+          sed -i "s|${DATASOURCE_PASSWORD}|$DATASOURCE_PASSWORD|g" ./src/main/resources/application.yml
         env:
           DATASOURCE_URL: ${{ secrets.DATASOURCE_URL }}
           DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
