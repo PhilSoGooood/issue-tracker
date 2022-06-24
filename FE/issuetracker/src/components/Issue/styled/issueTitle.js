@@ -17,9 +17,3 @@ export const issueNumber = styled.div`
   ${({ theme }) => theme.fontStyles.display};
   color: ${({ theme }) => theme.fontColors.gray2};
 `;
-
-export const buttonWrapper = styled.div`
-  display: inline-flex;
-  position: absolute;
-  right: 0;
-`;

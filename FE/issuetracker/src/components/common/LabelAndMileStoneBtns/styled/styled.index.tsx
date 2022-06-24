@@ -16,19 +16,19 @@ export const tabBar = styled.nav`
   border-radius: 11px;
 `;
 
-export const leftBar = styled(Link)<{ isLabelPage: boolean }>`
+export const leftBar = styled(Link)<{ $islabelpage: boolean }>`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   width: 160px;
   height: 40px;
   border-radius: 11px 0 0 11px;
   text-decoration: none;
-  background: ${({ isLabelPage, theme }) =>
-    isLabelPage ? theme.backgroundColors.gray4 : theme.backgroundColors.gray2};
+  background: ${({ $islabelpage, theme }) =>
+    $islabelpage ? theme.backgroundColors.gray4 : theme.backgroundColors.gray2};
 `;
 
-export const rightBar = styled(leftBar)<{ isLabelPage: boolean }>`
-  background: ${({ isLabelPage, theme }) =>
-    isLabelPage ? theme.backgroundColors.gray2 : theme.backgroundColors.gray4};
+export const rightBar = styled(leftBar)<{ $islabelpage: boolean }>`
+  background: ${({ $islabelpage, theme }) =>
+    $islabelpage ? theme.backgroundColors.gray2 : theme.backgroundColors.gray4};
 `;
 
 export const LinkText = styled.span`

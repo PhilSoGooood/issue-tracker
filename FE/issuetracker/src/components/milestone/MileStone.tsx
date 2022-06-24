@@ -1,14 +1,20 @@
+import * as I from 'design/icons';
+import * as S from 'components/milestone/styled/styled.milestone';
 import { ProgressBar } from 'components/common/Common';
 import EditAndDeleteBtn from 'components/common/LabelAndMileStoneBtns/EditAndDeleteBtn';
-import * as S from 'components/milestone/styled/styled.milestone';
-import * as I from 'design/icons';
+import { mileStoneType } from 'context/milestone';
+import { calculatePercent } from 'utils/util';
 
-type MileStoneType = {
+interface Props {
   idx: number;
-  title: string;
-};
+  mileStone: mileStoneType;
+}
 
-function MileStone({ idx, title }: MileStoneType) {
+function MileStone({
+  idx,
+  mileStone: { title, dueDate, description, progress, openedIssue, closedIssue },
+}: Props) {
+  const percent = calculatePercent(progress);
   return (
     <S.MileStoneWrap idx={idx}>
       <S.MileStoneTop>
@@ -19,7 +25,7 @@ function MileStone({ idx, title }: MileStoneType) {
           <S.Title>{title}</S.Title>
           <S.DueDate>
             <I.calendar />
-            완료일 일정
+            {dueDate}
           </S.DueDate>
         </S.MileStoneTopLeft>
         <S.MileStoneTopRight>
@@ -31,12 +37,14 @@ function MileStone({ idx, title }: MileStoneType) {
         </S.MileStoneTopRight>
       </S.MileStoneTop>
       <S.MileStoneBottom>
-        <S.Discription>마일스톤 상세 설명</S.Discription>
+        <S.Discription>{description}</S.Discription>
         <S.MileStoneProgressBar>
-          <ProgressBar />
+          <ProgressBar percent={percent} />
           <S.ProgressStatus>
-            <S.CompleteRate>50%</S.CompleteRate>
-            <S.IssueStatus>열린 이슈 1 닫힌 이슈 1</S.IssueStatus>
+            <S.CompleteRate>{percent}%</S.CompleteRate>
+            <S.IssueStatus>
+              열린 이슈 {openedIssue} 닫힌 이슈 {closedIssue}
+            </S.IssueStatus>
           </S.ProgressStatus>
         </S.MileStoneProgressBar>
       </S.MileStoneBottom>

@@ -5,7 +5,7 @@ function LabelPage() {
   const isLabelPage = window.location.href === `http://localhost:3000/label`;
   return (
     <>
-      <LabelTop activeLabel={isLabelPage} />
+      <LabelTop $activeLabel={isLabelPage} />
       <LabelList />
     </>
   );

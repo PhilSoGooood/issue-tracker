@@ -1,15 +1,11 @@
 import * as I from 'design/icons';
 import * as S from 'components/milestone/styled/styled.index';
-import * as L from 'components/LabelPage/styled.labelList';
-import { keyMaker } from 'utils/util';
+import * as L from 'components/LabelPage/styled/styled.labelList';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
-import MileStone from './MileStone';
+import MileStone from 'components/milestone/MileStone';
+import { mileStoneData } from 'context/milestone';
+import { keyMaker } from 'utils/util';
 
-const mileStones: Array<string> = ['마일스톤 제목', '마스터즈 코스'];
-const mileStoneList = mileStones.map((title, idx) => {
-  const key: string = keyMaker();
-  return <MileStone key={key} idx={idx} title={title} />;
-});
 function MileStonePage() {
   return (
     <S.MileStonePageWrapper>
@@ -27,7 +23,10 @@ function MileStonePage() {
             </S.ClosedMileStone>
           </S.MileStoneStatus>
         </L.labelListTop>
-        {mileStoneList}
+        {mileStoneData.map((mileStone, idx) => {
+          const key: string = keyMaker();
+          return <MileStone key={key} idx={idx} mileStone={mileStone} />;
+        })}
       </L.labelListLayout>
     </S.MileStonePageWrapper>
   );

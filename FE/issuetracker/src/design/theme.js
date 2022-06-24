@@ -20,6 +20,16 @@ const fontColors = {
   purple: '#0025E7',
   red: '#FF3B30',
 };
+const labelColors = {
+  label1: '#004DE3',
+  label2: '#C60B00',
+  label3: '#1a133d',
+  label4: '#321820',
+  label5: '#30343a',
+  label6: '#0b2628',
+  label7: '#343726',
+  label8: '#383436',
+};
 const fontStyles = {
   logoMedium: {
     fontFamily: 'Montserrat',
@@ -75,4 +85,5 @@ export const theme = {
   backgroundColors,
   fontColors,
   fontStyles,
+  labelColors,
 };

@@ -52,7 +52,7 @@ export const userName = styled.span`
   ${({ theme }) => theme.fontStyles.textSmall};
 `;
 
-export const label = styled.label`
+export const label = styled.label<{ color: string; backgroundColor: string }>`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   ${({ theme }) => theme.fontStyles.textXSmall};
   width: 121px;
@@ -60,8 +60,8 @@ export const label = styled.label`
   padding: 0 16px;
   border-radius: 30px;
   margin: 16px 0;
-  background: ${({ theme }) => theme.backgroundColors.purple1};
-  color: ${({ theme }) => theme.fontColors.gray1};
+  background: ${({ backgroundColor, theme }) => theme.backgroundColors[backgroundColor]};
+  color: ${({ color, theme }) => theme.fontColors[color]};
 `;
 
 export const milstoneContent = styled.div`

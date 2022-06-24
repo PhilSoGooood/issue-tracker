@@ -2,17 +2,21 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const labelList = styled.li<{ isLastList: boolean }>`
-  ${mixin.flexbox({ vertical: 'center' })};
-  width: inherit;
+  ${mixin.flexbox({ vertical: 'center', horizontal: 'space-between' })};
+  width: 100%;
   height: 100px;
   padding: 0 32px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  border-bottom: none;
   border-radius: ${({ isLastList }) => (isLastList ? '0 0 16px 16px' : '')};
   margin-bottom: 1px;
   background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
-
-export const labelImageWrapper = styled.figure`
+export const LabelListLeft = styled.div`
+  ${mixin.flexbox({ vertical: 'center' })};
+`;
+export const labelImageWrapper = styled.div`
+  ${mixin.flexbox({ horizontal: 'flex-start', vertical: 'center' })}
   width: 184px;
   margin-right: 24px;
 `;
@@ -32,7 +36,6 @@ export const labelImage = styled.label<{ color: string }>`
 export const labelListDescription = styled.div`
   ${mixin.flexbox({ vertical: 'center' })};
   ${({ theme }) => theme.fontStyles.textSmall};
-  width: 880px;
   color: ${({ theme }) => theme.fontColors.gray2};
 `;
 

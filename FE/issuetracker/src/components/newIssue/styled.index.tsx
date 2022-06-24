@@ -33,20 +33,6 @@ export const TitleInput = styled.input`
   border-radius: 14px;
   background: ${({ theme }) => theme.backgroundColors.gray3};
 `;
-export const AdditionalContents = styled.div`
-  ${mixin.flexbox({ dir: 'column', vertical: 'flex-start' })};
-  width: 308px;
-  border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
-`;
-export const AdditionalContent = styled.div<{ idx: number }>`
-  ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
-  padding: 34px 32px;
-  width: 100%;
-  border-top: ${({ idx }) => (idx === 0 ? 'none' : '1px solid #D9DBE9')};
-  ${({ theme }) => theme.fontStyles.linkSmall};
-  color: ${({ theme }) => theme.fontColors.gray2};
-`;
 export const InputArea = styled.div`
   width: 880px;
   /* height: 343px; */

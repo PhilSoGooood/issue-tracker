@@ -1,10 +1,12 @@
+import { useRecoilValue } from 'recoil';
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueSidebar';
-import userImageURL from 'assets/images/UserImageLarge.svg';
-import userImageURL2 from 'assets/images/UserImageLarge2.svg';
+import * as S from 'components/Issue/styled/issueSidebar';
 import { ProgressBar } from 'components/common/Common';
+import { issueState } from 'context/issue';
+import { calculatePercent } from 'utils/util';
 
 function IssueSidebar() {
+  const issueData = useRecoilValue(issueState);
   return (
     <S.sidebarWrapper>
       <S.sidebar>
@@ -13,29 +15,35 @@ function IssueSidebar() {
             <S.barHeaderText>작성자</S.barHeaderText>
             <I.plus />
           </S.barHeader>
-          <S.userUnit>
-            <img src={userImageURL} alt={userImageURL} />
-            <S.userName>Oni</S.userName>
-          </S.userUnit>
-          <S.userUnit>
-            <img src={userImageURL2} alt={userImageURL2} />
-            <S.userName>Daniel</S.userName>
-          </S.userUnit>
+          {issueData.assignees.map(({ id, imageUrl, name }) => (
+            <S.userUnit key={id}>
+              <img src={imageUrl} alt="assignee-icon-img" />
+              <S.userName>{name}</S.userName>
+            </S.userUnit>
+          ))}
         </S.userBar>
         <S.labelBar>
           <S.barHeader>
             <S.barHeaderText>레이블</S.barHeaderText>
             <I.plus />
           </S.barHeader>
-          <S.label>documentation</S.label>
+          {issueData.labels.map((label) => (
+            <S.label
+              key={label.id}
+              color={label.color.font}
+              backgroundColor={label.color.background}
+            >
+              {label.title}
+            </S.label>
+          ))}
         </S.labelBar>
         <S.milestoneBar>
           <S.barHeader>
             <S.barHeaderText>마일스톤</S.barHeaderText>
             <I.plus />
           </S.barHeader>
-          <ProgressBar />
-          <S.milstoneContent>마스터즈 코스</S.milstoneContent>
+          <ProgressBar percent={calculatePercent(issueData.milestone.progress)} />
+          <S.milstoneContent>{issueData.milestone.title}</S.milstoneContent>
         </S.milestoneBar>
       </S.sidebar>
       <S.buttonWrapper>

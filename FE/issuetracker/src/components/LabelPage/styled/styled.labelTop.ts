@@ -16,14 +16,14 @@ export const tabBar = styled.nav`
   border-radius: 11px;
 `;
 
-export const leftBar = styled(Link)<{ activeLabel: boolean }>`
+export const leftBar = styled(Link)<{ $activeLabel: boolean }>`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   width: 160px;
   height: 40px;
   border-radius: 11px 0 0 11px;
   text-decoration: none;
-  background: ${({ activeLabel, theme }) =>
-    activeLabel ? theme.backgroundColors.gray4 : theme.backgroundColors.gray2};
+  background: ${({ $activeLabel, theme }) =>
+    $activeLabel ? theme.backgroundColors.gray4 : theme.backgroundColors.gray2};
 `;
 
 export const rightBar = styled(Link)`

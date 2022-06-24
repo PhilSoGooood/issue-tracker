@@ -18,20 +18,26 @@ export const commentUserImage = styled.figure`
   margin-right: 16px;
 `;
 
-export const comment = styled.div`
+export const comment = styled.div<{ isInputActive: boolean }>`
   ${mixin.flexbox({ dir: 'column' })};
   height: 343px;
   border-radius: 16px;
-  background: ${({ theme }) => theme.backgroundColors.gray3};
+  background: ${({ isInputActive, theme }) =>
+    isInputActive ? theme.backgroundColors.gray1 : theme.backgroundColors.gray3};
 `;
 
-export const textArea = styled.div`
+export const textArea = styled.textarea`
   ${({ theme }) => theme.fontStyles.textSmall};
   width: 880px;
   height: 291px;
   padding: 16px 24px;
   border-radius: 16px 16px 0 0;
-  color: ${({ theme }) => theme.fontColors.gray4};
+  color: ${({ theme }) => theme.fontColors.gray5};
+
+  &:empty:before {
+    content: attr(placeholder);
+    color: ${({ theme }) => theme.fontColors.gray4};
+  }
 `;
 
 export const attachFileButtonWrapper = styled.div`

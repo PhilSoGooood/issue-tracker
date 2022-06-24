@@ -2,21 +2,20 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const newLabelListWrapper = styled.div`
-  width: 1280px;
+  width: 100%;
   margin-top: 24px;
 `;
 
 export const labelForm = styled.div`
   ${mixin.flexbox({})}
-  width: 1280px;
+  width: 100%;
   height: 100px;
-  padding: 16px 0 24px 0;
+  padding: 16px 24px 24px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  gap: 15px;
 `;
 
 const labelContent = styled.div`
-  margin-left: 24px;
-
   span {
     ${({ theme }) => theme.fontStyles.textXSmall};
     display: inline-block;
@@ -58,7 +57,8 @@ export const labelColorController = styled.div`
 `;
 
 export const labelColorButton = styled.button.attrs(() => ({ type: 'button' }))`
-  margin-right: 4px;
+  ${mixin.flexbox({ vertical: 'center' })};
+  gap: 10px;
 `;
 
 export const buttonsWrapper = styled.div`

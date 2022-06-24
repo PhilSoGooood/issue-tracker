@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import * as I from 'design/icons';
-import * as S from 'components/LabelPage/styled.labelTop';
+import * as S from 'components/LabelPage/styled/styled.labelTop';
 import NewLabelList from 'components/LabelPage/NewLabelList';
 
 interface Props {
-  activeLabel: boolean;
+  $activeLabel: boolean;
 }
 
-const initialLabel = {
-  title: '레이블 이름',
-  color: '',
-  description: '레이블에 대한 설명',
-};
-
-function LabelTop({ activeLabel }: Props) {
+function LabelTop({ $activeLabel }: Props) {
   const [isClicked, setIsClicked] = useState(false);
+  const isNewLabel = true;
+  function showLabel() {
+    setIsClicked(!isClicked);
+  }
   return (
     <>
       <S.labelTop>
         <S.tabBar>
-          <S.leftBar to="/label" activeLabel={activeLabel}>
+          <S.leftBar to="/label" $activeLabel={$activeLabel}>
             <I.tag />
             <S.LinkText>레이블</S.LinkText>
             <S.numberText>(3)</S.numberText>
@@ -30,12 +28,16 @@ function LabelTop({ activeLabel }: Props) {
             <S.numberText>(2)</S.numberText>
           </S.rightBar>
         </S.tabBar>
-        <S.addButton onClick={() => setIsClicked(true)}>
+        <S.addButton
+          onClick={() => {
+            showLabel();
+          }}
+        >
           <I.plus />
           <S.addButtonText>추가</S.addButtonText>
         </S.addButton>
       </S.labelTop>
-      {isClicked && <NewLabelList label={initialLabel} isNewLabel />}
+      {isClicked && <NewLabelList isNewLabel={isNewLabel} />}
     </>
   );
 }
