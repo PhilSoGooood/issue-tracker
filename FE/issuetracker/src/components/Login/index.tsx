@@ -24,7 +24,9 @@ function Login() {
           if (login) {
             navigate('/');
           } else {
-            navigate('/callback');
+            fetch(
+              'https://github.com/login/oauth/authorize?client_id=15bef45e3df6b28cf7d6&scope=repo:status read:repo_hook user:email',
+            );
           }
         }}
       >
