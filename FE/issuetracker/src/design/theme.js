@@ -16,9 +16,20 @@ const fontColors = {
   gray3: '#4E4B66',
   gray4: '#A0A3BD',
   gray5: '#14142B',
+  black: '#000000',
   blue: ' #007AFF',
   purple: '#0025E7',
   red: '#FF3B30',
+};
+const labelColors = {
+  label1: '#004DE3',
+  label2: '#C60B00',
+  label3: '#1a133d',
+  label4: '#321820',
+  label5: '#30343a',
+  label6: '#0b2628',
+  label7: '#343726',
+  label8: '#383436',
 };
 const fontStyles = {
   logoMedium: {
@@ -70,9 +81,15 @@ const fontStyles = {
     fontSize: '18px',
     lineHeight: '32px',
   },
+  textLarge: {
+    fontWeight: 400,
+    fontSize: '24px',
+    lineHeight: '40px',
+  },
 };
 export const theme = {
   backgroundColors,
   fontColors,
   fontStyles,
+  labelColors,
 };

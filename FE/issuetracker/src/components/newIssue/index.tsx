@@ -2,18 +2,9 @@ import { AccountImg } from 'components/common/Common';
 import * as S from 'components/newIssue/styled.index';
 import * as I from 'design/icons';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
-import { keyMaker } from 'utils/util';
+import SideBar from 'components/common/Sidebar';
 
 function NewIssue() {
-  const additionalContentTitles: Array<string> = ['담당자', '레이블', '마일스톤'];
-  const additionalContents = additionalContentTitles.map((content, idx) => {
-    const key: string = keyMaker();
-    return (
-      <S.AdditionalContent key={key} idx={idx}>
-        {content} <I.plus />
-      </S.AdditionalContent>
-    );
-  });
   return (
     <S.NewIssueWrap>
       <S.NewIssueTitle>새로운 이슈 작성</S.NewIssueTitle>
@@ -32,7 +23,7 @@ function NewIssue() {
             </S.AttatchFile>
           </S.InputArea>
         </S.IssueContentLeft>
-        <S.AdditionalContents>{additionalContents}</S.AdditionalContents>
+        <SideBar />
       </S.NewIssueContent>
       <S.UnderLine />
       <S.Buttons>

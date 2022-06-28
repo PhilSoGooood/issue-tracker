@@ -1,12 +1,13 @@
+import { useRecoilValue } from 'recoil';
 import * as S from 'components/header/styled.index';
-import AccountSrc from 'assets/images/UserImageLarge.svg';
+import { userState } from 'context/userState';
 
 function Header() {
-  const isLoginPage = window.location.href === `http://localhost:3000/`;
+  const { profileUrl } = useRecoilValue(userState);
   return (
-    <S.HeaderWrap checkPage={isLoginPage}>
-      <S.Title to="/issueList">Issue Tracker</S.Title>
-      <S.AccountImg src={AccountSrc} />
+    <S.HeaderWrap>
+      <S.Title to="/">Issue Tracker</S.Title>
+      <S.AccountImg src={profileUrl} />
     </S.HeaderWrap>
   );
 }

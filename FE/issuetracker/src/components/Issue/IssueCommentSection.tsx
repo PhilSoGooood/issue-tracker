@@ -1,14 +1,22 @@
-import * as S from 'components/Issue/styled.issueCommentSection';
+import { useRecoilValue } from 'recoil';
+import * as S from 'components/Issue/styled/issueCommentSection';
 import IssueComment from 'components/Issue/IssueComment';
 import InputComment from 'components/Issue/InputComment';
-import userImageURL from 'assets/images/UserImageLarge.svg';
-import userImageURL2 from 'assets/images/UserImageLarge2.svg';
+import { issueState } from 'context/issue';
 
 function IssueCommentSection() {
+  const issueData = useRecoilValue(issueState);
   return (
     <S.commentSection>
-      <IssueComment imageURL={userImageURL} />
-      <IssueComment imageURL={userImageURL2} />
+      {issueData.comments.map((comment) => (
+        <IssueComment
+          key={comment.writer.id}
+          imageURL={comment.writer.imageUrl}
+          writerName={comment.writer.name}
+          log={comment.log}
+          description={comment.description}
+        />
+      ))}
       <InputComment />
     </S.commentSection>
   );
