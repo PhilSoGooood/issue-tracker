@@ -8,7 +8,7 @@ function Callback() {
   const navigate = useNavigate();
   const setLogin = useSetRecoilState(loginState);
   const [userData, setUserData] = useRecoilState(userState);
-  const authUri = 'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/login';
+  const authUri = 'http://144.24.86.236/login ';
 
   useEffect(() => {
     const getToken = async () => {
