@@ -56,23 +56,3 @@ export const attachFileButtonText = styled.span`
   ${({ theme }) => theme.fontStyles.linkSSmall};
   margin-left: 8px;
 `;
-
-export const saveCommentButtonWrapper = styled.div`
-  ${mixin.flexbox({ dir: 'row-reverse' })};
-  width: 880px;
-  margin-left: 60px;
-`;
-
-export const saveCommentButton = styled.button`
-  width: 120px;
-  height: 40px;
-  border-radius: 11px;
-  background: ${({ theme }) => theme.backgroundColors.blue2};
-  color: ${({ theme }) => theme.fontColors.gray1};
-  opacity: 0.5;
-`;
-
-export const saveCommentButtonText = styled.span`
-  ${({ theme }) => theme.fontStyles.linkSSmall};
-  margin-left: 4px;
-`;

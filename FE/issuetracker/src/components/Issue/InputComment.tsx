@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 
 import * as I from 'design/icons';
 import * as S from 'components/Issue/styled/inputComment';
+import SaveButton from 'components/common/SaveButton';
 
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import { issueState } from 'context/issue';
@@ -59,12 +60,16 @@ function InputComment() {
           </S.attachFileButtonWrapper>
         </S.comment>
       </S.commentWrapper>
+<<<<<<< HEAD
       <S.saveCommentButtonWrapper>
         <S.saveCommentButton onClick={saveComment}>
           <I.plus />
           <S.saveCommentButtonText>코멘트 작성</S.saveCommentButtonText>
         </S.saveCommentButton>
       </S.saveCommentButtonWrapper>
+=======
+      <SaveButton buttonText="완료" margin="0 0 0 60px" handleButtonClick={saveComment} />
+>>>>>>> 4334b3fd6557516cccd266c86af8afc9660eb823
     </S.inputComment>
   );
 }

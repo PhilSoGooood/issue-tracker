@@ -59,9 +59,15 @@ function IssueTitle() {
         <IssueTitleContent />
       )}
       {isEditable ? (
-        <CancleAndSaveButtons clickHandler1={cancleEdit} clickHandler2={saveInputValue} />
+        <CancleAndSaveButtons
+          handleCancleButtonClick={cancleEdit}
+          handleSaveButtonClick={saveInputValue}
+        />
       ) : (
-        <EditAndCloseButtons clickHandler1={startEdit} clickHandler2={toggleIssueState} />
+        <EditAndCloseButtons
+          handleEditButtonClick={startEdit}
+          handleCloseButtonClick={toggleIssueState}
+        />
       )}
     </S.issueTitleWrapper>
   );

@@ -7,6 +7,10 @@ import Issue from 'components/Issue';
 import NewIssue from 'components/newIssue';
 import LabelPage from 'components/LabelPage';
 import MileStone from 'components/milestone';
+<<<<<<< HEAD
+=======
+import Callback from 'components/Callback';
+>>>>>>> 4334b3fd6557516cccd266c86af8afc9660eb823
 import { loginState } from 'context/loginState';
 
 interface Props {
@@ -40,6 +44,10 @@ function Router() {
         }
       />
       <Route path="/login" element={<Login />} />
+<<<<<<< HEAD
+=======
+      <Route path="/callback" element={<Callback />} />
+>>>>>>> 4334b3fd6557516cccd266c86af8afc9660eb823
       <Route
         path="/newIssue"
         element={

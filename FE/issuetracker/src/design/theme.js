@@ -16,6 +16,7 @@ const fontColors = {
   gray3: '#4E4B66',
   gray4: '#A0A3BD',
   gray5: '#14142B',
+  black: '#000000',
   blue: ' #007AFF',
   purple: '#0025E7',
   red: '#FF3B30',
@@ -79,6 +80,11 @@ const fontStyles = {
     fontWeight: 400,
     fontSize: '18px',
     lineHeight: '32px',
+  },
+  textLarge: {
+    fontWeight: 400,
+    fontSize: '24px',
+    lineHeight: '40px',
   },
 };
 export const theme = {

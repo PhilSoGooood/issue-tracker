@@ -42,16 +42,25 @@ export const numberText = styled.span`
   color: ${({ theme }) => theme.fontColors.gray2};
 `;
 
-export const addButton = styled.button.attrs(() => ({ type: 'button' }))`
+export const button = styled.button.attrs(() => ({ type: 'button' }))`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   width: 120px;
   height: 40px;
   border-radius: 11px;
+`;
+
+export const addButton = styled(button)`
   background: ${({ theme }) => theme.backgroundColors.blue2};
   color: ${({ theme }) => theme.fontColors.gray1};
 `;
 
-export const addButtonText = styled.span`
+export const closeButton = styled(button)`
+  border: 2px solid ${({ theme }) => theme.backgroundColors.blue2};
+  background: ${({ theme }) => theme.backgroundColors.gray1};
+  color: ${({ theme }) => theme.fontColors.blue};
+`;
+
+export const buttonText = styled.span`
   ${({ theme }) => theme.fontStyles.linkSSmall};
   margin-left: 4px;
 `;

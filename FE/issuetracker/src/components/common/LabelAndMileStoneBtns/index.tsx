@@ -1,7 +1,16 @@
 import * as I from 'design/icons';
 import * as S from 'components/common/LabelAndMileStoneBtns/styled/styled.index';
 
-function LabelAndMileStoneBtns() {
+interface Props {
+  isAddButtonClicked: boolean;
+  handleAddButtonClick: () => void;
+  handleCloseButtonClick: () => void;
+}
+function LabelAndMileStoneBtns({
+  isAddButtonClicked,
+  handleAddButtonClick,
+  handleCloseButtonClick,
+}: Props) {
   const isLabelPage: boolean = window.location.href === `http://localhost:3000/label`;
   return (
     <S.labelTop>
@@ -17,10 +26,17 @@ function LabelAndMileStoneBtns() {
           <S.numberText>(2)</S.numberText>
         </S.rightBar>
       </S.tabBar>
-      <S.addButton>
-        <I.plus />
-        <S.addButtonText>추가</S.addButtonText>
-      </S.addButton>
+      {isAddButtonClicked ? (
+        <S.closeButton onClick={handleCloseButtonClick}>
+          <I.cross />
+          <S.buttonText>닫기</S.buttonText>
+        </S.closeButton>
+      ) : (
+        <S.addButton onClick={handleAddButtonClick}>
+          <I.plus />
+          <S.buttonText>추가</S.buttonText>
+        </S.addButton>
+      )}
     </S.labelTop>
   );
 }

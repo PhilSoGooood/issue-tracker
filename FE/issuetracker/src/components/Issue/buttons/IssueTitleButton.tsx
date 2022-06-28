@@ -4,12 +4,12 @@ interface Props {
   buttonIcon: React.ReactNode;
   buttonText: string;
   buttonState: string;
-  clickHandler: () => void;
+  handleButtonClick: () => void;
 }
 
-function IssueTitleButton({ buttonIcon, buttonText, buttonState, clickHandler }: Props) {
+function IssueTitleButton({ buttonIcon, buttonText, buttonState, handleButtonClick }: Props) {
   return (
-    <S.issueButton buttonState={buttonState} onClick={clickHandler}>
+    <S.issueButton buttonState={buttonState} onClick={handleButtonClick}>
       {buttonIcon}
       <S.buttonText>{buttonText}</S.buttonText>
     </S.issueButton>

@@ -108,7 +108,11 @@ function NewLabelList({ isNewLabel }: LabelListType) {
               <I.cross />
               취소
             </S.cancleButton>
-            <S.saveButton>
+            <S.saveButton
+              onClick={() => {
+                alert('성공적으로 등록되었습니다');
+              }}
+            >
               <I.edit />
               완료
             </S.saveButton>

@@ -1,11 +1,13 @@
+import { useRecoilValue } from 'recoil';
 import * as S from 'components/header/styled.index';
-import AccountSrc from 'assets/images/UserImageLarge.svg';
+import { userState } from 'context/userState';
 
 function Header() {
+  const { profileUrl } = useRecoilValue(userState);
   return (
     <S.HeaderWrap>
       <S.Title to="/">Issue Tracker</S.Title>
-      <S.AccountImg src={AccountSrc} />
+      <S.AccountImg src={profileUrl} />
     </S.HeaderWrap>
   );
 }
