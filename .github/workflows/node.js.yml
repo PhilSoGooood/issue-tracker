@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "FE-deploy" ]
+    branches: ['FE-deploy']
   pull_request:
-    branches: [ "FE-deploy" ]
+    branches: ['FE-deploy']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     defaults:
