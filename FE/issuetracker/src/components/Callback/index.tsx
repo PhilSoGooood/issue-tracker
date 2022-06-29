@@ -9,7 +9,7 @@ function Callback() {
   const setLogin = useSetRecoilState(loginState);
   const [userData, setUserData] = useRecoilState(userState);
   const authUri = 'http://144.24.86.236/login ';
-
+  // const authUri = 'https://github.com/login/oauth/authorize?client_id=15bef45e3df6b28cf7d6&scope=repo:status read:repo_hook user:email'
   useEffect(() => {
     const getToken = async () => {
       try {
