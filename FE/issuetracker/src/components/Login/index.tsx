@@ -24,7 +24,8 @@ function Login() {
           if (login) {
             navigate('/');
           } else {
-            navigate('/callback');
+            window.location.href = 'http://144.24.86.236/login';
+            // navigate('/callback');
           }
         }}
       >
