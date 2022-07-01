@@ -37,8 +37,6 @@ function NewMileStone({
     });
   };
 
-<<<<<<< HEAD
-=======
   const handleSaveButtonClick = () => {
     mutation.mutate(mileStoneState);
   };
@@ -47,7 +45,6 @@ function NewMileStone({
     setEditButtonClick(false);
   };
 
->>>>>>> ec196c29fa39272bead5f34a362df3e16c16ec16
   return (
     <S.newMileStoneWrapper>
       <S.Title>{isNewMileStone ? '새로운 마일스톤 추가' : '마일스톤 편집'}</S.Title>
@@ -71,9 +68,6 @@ function NewMileStone({
         placeholder={description || '설명(선택)'}
         handleInputChange={handleInputChange}
       />
-<<<<<<< HEAD
-      <SaveButton buttonText="완료" margin="24px 0 0 0" handleButtonClick={() => {}} />
-=======
       {mileStoneData && (
         <S.saveButtonWrapper>
           <SaveButton buttonText="완료" handleButtonClick={handleSaveButtonClick} />
@@ -87,7 +81,6 @@ function NewMileStone({
           )}
         </S.saveButtonWrapper>
       )}
->>>>>>> ec196c29fa39272bead5f34a362df3e16c16ec16
     </S.newMileStoneWrapper>
   );
 }

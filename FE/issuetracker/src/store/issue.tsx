@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import userImageURL2 from 'assets/images/UserImageLarge2.svg';
-import { initialStateType, newIssueType } from './newIssue';
+import { initialStateType, newIssueType } from 'store/newIssue';
 
 const initialData: newIssueType = {
   id: 2,
