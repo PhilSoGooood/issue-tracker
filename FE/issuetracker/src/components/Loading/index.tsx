@@ -9,9 +9,8 @@ function Loading() {
   const navigate = useNavigate();
   const setLogin = useSetRecoilState(loginState);
   const [userData, setUserData] = useRecoilState(userState);
-  const authUri =
-    'https://github.com/login/oauth/authorize?client_id=15bef45e3df6b28cf7d6&&redirect_uri=http://144.24.86.236/login/callback';
-  // const authUri = 'https://github.com/login/oauth/authorize?client_id=15bef45e3df6b28cf7d6&scope=repo:status read:repo_hook user:email'
+  const authUri = 'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/login';
+
   useEffect(() => {
     const getToken = async () => {
       try {
