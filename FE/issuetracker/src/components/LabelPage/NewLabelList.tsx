@@ -1,15 +1,16 @@
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
-import { useRecoilState } from 'recoil';
-import { initialLabelState, labelState } from 'store/label';
-import { useState } from 'react';
+import { initialLabelState, labelState, LabelType } from 'store/label';
 
 type LabelListType = {
   isNewLabel: boolean;
+  labelData?: LabelType;
 };
 
-function NewLabelList({ isNewLabel }: LabelListType) {
+function NewLabelList({ isNewLabel, labelData }: LabelListType) {
   const [newLabel, setNewLabel] = useRecoilState(labelState);
 
   const [text, setText] = useState({
@@ -53,6 +54,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
           <S.labelInput
             name="title"
             value={title}
+            placeholder={labelData?.title || title}
             onChange={(e) => {
               changeText(e);
             }}
@@ -65,6 +67,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
           <span>Description</span>
           <S.labelInput
             value={description}
+            placeholder={labelData?.description || description}
             name="description"
             onBlur={(e) => {
               makeNewLabelInfo(e);
@@ -82,6 +85,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
               <S.labelInput
                 value={color}
                 name="color"
+                placeholder={labelData?.color || color}
                 onBlur={(e) => {
                   makeNewLabelInfo(e);
                 }}
