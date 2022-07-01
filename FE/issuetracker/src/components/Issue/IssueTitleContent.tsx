@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import * as S from 'components/Issue/styled/issueTitleContent';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 
 function IssueTitleContent() {
   const issueData = useRecoilValue(issueState);

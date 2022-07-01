@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mixin } from 'design/GlobalStyles';
 
 export const newMileStoneWrapper = styled.div`
   width: 100%;
@@ -45,4 +46,11 @@ export const inputLabel = styled.label`
   width: 80px;
   height: 40px;
   margin-right: 8px;
+`;
+
+export const saveButtonWrapper = styled.div`
+  ${mixin.flexbox({ dir: 'row-reverse' })};
+  width: 100%;
+  margin-top: 24px;
+  gap: 8px;
 `;

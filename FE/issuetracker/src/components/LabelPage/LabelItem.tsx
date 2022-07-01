@@ -1,7 +1,8 @@
-import * as I from 'design/icons';
+/* eslint-disable @typescript-eslint/no-empty-function */
 import * as S from 'components/LabelPage/styled/styled.labelItem';
-import { LabelType } from 'context/label';
+import { LabelType } from 'store/label';
 import Label from 'components/common/Common';
+import EditAndDeleteBtn from 'components/common/LabelAndMileStoneBtns/EditAndDeleteBtn';
 
 type LabelItemType = {
   label: LabelType;
@@ -10,20 +11,6 @@ type LabelItemType = {
 };
 
 function LabelItem({ label, isLastList, isNewLabel }: LabelItemType) {
-  const labelListButton = !isNewLabel ? (
-    <S.labelListButtonWrapper>
-      <S.labelEditButton>
-        <I.edit />
-        <S.labelButtonText>편집</S.labelButtonText>
-      </S.labelEditButton>
-      <S.labelDeleteButton>
-        <I.edit />
-        <S.labelButtonText>삭제</S.labelButtonText>
-      </S.labelDeleteButton>
-    </S.labelListButtonWrapper>
-  ) : (
-    ''
-  );
   return (
     <S.labelList isLastList={isLastList}>
       <S.LabelListLeft>
@@ -32,7 +19,13 @@ function LabelItem({ label, isLastList, isNewLabel }: LabelItemType) {
         </S.labelImageWrapper>
         <S.labelListDescription>{label.description}</S.labelListDescription>
       </S.LabelListLeft>
-      {labelListButton}
+      {!isNewLabel && (
+        <EditAndDeleteBtn
+          elementId=""
+          handleEditButtonClick={() => {}}
+          handleDeleteButtonClick={() => {}}
+        />
+      )}
     </S.labelList>
   );
 }

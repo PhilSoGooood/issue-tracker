@@ -64,3 +64,7 @@ export const buttonText = styled.span`
   ${({ theme }) => theme.fontStyles.linkSSmall};
   margin-left: 4px;
 `;
+export const addButtonText = styled.span`
+  ${({ theme }) => theme.fontStyles.linkSSmall};
+  margin-left: 4px;
+`;

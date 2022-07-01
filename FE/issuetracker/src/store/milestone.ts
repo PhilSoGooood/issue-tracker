@@ -37,8 +37,8 @@ interface mileStoneStateType {
   default: mileStoneType;
 }
 
-const initialMileStone: mileStoneType = {
-  id: 1,
+export const initialMileStone: mileStoneType = {
+  id: 0,
   title: '마일스톤 제목',
   description: '레이블에 대한 설명',
   dueDate: '완료일 일정',

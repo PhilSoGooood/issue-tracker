@@ -2,7 +2,7 @@ import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
 import { useRecoilState } from 'recoil';
-import { initialLabelState, labelState } from 'context/label';
+import { initialLabelState, labelState } from 'store/label';
 import { useState } from 'react';
 
 type LabelListType = {

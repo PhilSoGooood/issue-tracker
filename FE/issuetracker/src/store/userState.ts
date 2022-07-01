@@ -1,5 +1,8 @@
 import { atom } from 'recoil';
 
+const data = localStorage.getItem('profileImage');
+const profileUrl = data !== null ? data : '';
+
 interface userType {
   name: string;
   profileUrl: string;
@@ -14,7 +17,7 @@ const initialState: userStateType = {
   key: 'userState',
   default: {
     name: '',
-    profileUrl: '',
+    profileUrl,
   },
 };
 

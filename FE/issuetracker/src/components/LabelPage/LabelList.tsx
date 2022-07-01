@@ -1,35 +1,33 @@
 import * as S from 'components/LabelPage/styled/styled.labelList';
 import { keyMaker } from 'utils/util';
 import LabelItem from 'components/LabelPage/LabelItem';
+import { useGetData } from 'APIs/Api';
 
-const initialLabelList = [
-  {
-    id: 1,
-    title: '레이블 이름',
-    color: 'blue',
-    description: '레이블에 대한 설명',
-  },
-  {
-    id: 2,
-    title: 'Documentation',
-    color: 'blue',
-    description: '서비스에 대한 개선 사항 혹은 추가 사항',
-  },
-  { id: 3, title: 'bug', color: 'red', description: '서비스에서 발생하는 오류들' },
-];
+type LabelType = {
+  id?: number;
+  title: string;
+  color: string;
+  description: string;
+};
 
 function LabelList() {
+  const { data, status } = useGetData(
+    'labels',
+    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/labels',
+  );
+  const labelData: LabelType[] = data;
   return (
     <S.labelListLayout>
       <S.labelListTop>
         <S.labelListTopText>3개의 레이블</S.labelListTopText>
       </S.labelListTop>
       <S.labelListWrapper>
-        {initialLabelList.map((label, index) => {
-          const key = keyMaker();
-          const isLastList = index === initialLabelList.length - 1;
-          return <LabelItem label={label} key={key} isLastList={isLastList} isNewLabel={false} />;
-        })}
+        {status === 'success' &&
+          labelData.map((label, index) => {
+            const key = keyMaker();
+            const isLastList = index === labelData.length - 1;
+            return <LabelItem label={label} key={key} isLastList={isLastList} isNewLabel={false} />;
+          })}
       </S.labelListWrapper>
     </S.labelListLayout>
   );

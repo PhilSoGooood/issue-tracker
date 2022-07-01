@@ -9,7 +9,6 @@ name: Java CI with Gradle
 
 on:
   push:
-<<<<<<< HEAD
     branches: [ "BE-deploy" ]
   pull_request:
     branches: [ "BE-deploy" ]
@@ -23,56 +22,17 @@ jobs:
       run:
         working-directory: ./BE
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    branches: [ "be-deploy" ]
-  pull_request:
-    branches: [ "be-deploy" ]
-=======
-    branches: [ "team-24" ]
-  pull_request:
-    branches: [ "team-24" ]
->>>>>>> 250e9cf (chore: (BE)github actions.yml init)
-=======
-    branches: [ "be-deploy" ]
-  pull_request:
-    branches: [ "be-deploy" ]
->>>>>>> 12fb95e (fix: gradle.yml 브랜치 수정)
-=======
-    branches: ["team-24"]
-  pull_request:
-    branches: ["team-24"]
->>>>>>> bfcf62c (chore: (BE)github actions.yml init)
-=======
-    branches: [ "team-24" ]
-  pull_request:
-    branches: [ "team-24" ]
->>>>>>> 471f0ef (chore: (BE)github actions.yml init)
-=======
-    branches: [ "be-deploy" ]
-  pull_request:
-    branches: [ "be-deploy" ]
->>>>>>> e37d9a8 (fix: gradle.yml 브랜치 수정)
-
 permissions:
   contents: read
 
 jobs:
   build:
-<<<<<<< HEAD
     runs-on: ubuntu-latest
-
->>>>>>> 94e09516c257367a105e42e80b3ef463a2b38623
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-<<<<<<< HEAD
           java-version: '11'
           distribution: 'temurin'
 
@@ -133,28 +93,3 @@ jobs:
           --application-name Issue-Tracker-Application \
           --deployment-group-name Issue-Tracker-Deploy-Group \
           --s3-location bucket=issue-tracker-was-bucket,key=issue-tracker.zip,bundleType=zip
-
-=======
-          java-version: "11"
-          distribution: "temurin"
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-        with:
-          arguments: build
-=======
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-      with:
-        arguments: build
->>>>>>> 471f0ef (chore: (BE)github actions.yml init)
->>>>>>> 94e09516c257367a105e42e80b3ef463a2b38623

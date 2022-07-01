@@ -24,7 +24,6 @@ export const labelListTopText = styled.span`
 
 export const labelListWrapper = styled.ul`
   width: inherit;
-  min-height: 287px;
   border-radius: 16px;
 `;
 

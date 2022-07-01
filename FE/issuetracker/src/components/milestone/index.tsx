@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { useState } from 'react';
 import * as I from 'design/icons';
 import * as S from 'components/milestone/styled/styled.index';
@@ -5,14 +6,22 @@ import * as L from 'components/LabelPage/styled/styled.labelList';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import MileStone from 'components/milestone/MileStone';
 import NewMileStone from 'components/milestone/NewMileStone';
-import { mileStoneData } from 'context/milestone';
 import { keyMaker } from 'utils/util';
+import { useGetData } from 'APIs/Api';
+import { MileStoneType } from 'data';
 
 function MileStonePage() {
-  const [isAddButtonClicked, setButtonClick] = useState(false);
+  const [isAddButtonClicked, setAddButtonClick] = useState(false);
+  const { data, status } = useGetData(
+    'milestones',
+    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/milestones',
+  );
+  const mileStonesData: MileStoneType[] = data;
+
   const handleButtonClick = () => {
-    setButtonClick(!isAddButtonClicked);
+    setAddButtonClick(!isAddButtonClicked);
   };
+
   return (
     <S.MileStonePageWrapper>
       <LabelAndMileStoneBtns
@@ -20,7 +29,7 @@ function MileStonePage() {
         handleAddButtonClick={handleButtonClick}
         handleCloseButtonClick={handleButtonClick}
       />
-      {isAddButtonClicked && <NewMileStone />}
+      {isAddButtonClicked && <NewMileStone isNewMileStone setEditButtonClick={() => {}} />}
       <L.labelListLayout>
         <L.labelListTop>
           <S.MileStoneStatus>
@@ -34,10 +43,11 @@ function MileStonePage() {
             </S.ClosedMileStone>
           </S.MileStoneStatus>
         </L.labelListTop>
-        {mileStoneData.map((mileStone, idx) => {
-          const key: string = keyMaker();
-          return <MileStone key={key} idx={idx} mileStone={mileStone} />;
-        })}
+        {status === 'success' &&
+          mileStonesData.map((mileStone, idx) => {
+            const key: string = keyMaker();
+            return <MileStone key={key} idx={idx} mileStoneData={mileStone} />;
+          })}
       </L.labelListLayout>
     </S.MileStonePageWrapper>
   );

@@ -19,6 +19,7 @@ export const FilterBar = styled.div`
 `;
 export const Filter = styled.button`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
+  position: relative;
   gap: 12px;
   width: 128px;
   height: 100%;
@@ -76,4 +77,37 @@ export const IssueOption = styled(Link)`
   ${({ theme }) => theme.fontStyles.linkSSmall};
   color: ${({ theme }) => theme.fontColors.gray1};
   text-decoration: none;
+`;
+
+export const Dropdown = styled.div<{ isClicked: boolean }>`
+  position: absolute;
+  left: 0;
+  top: 50px;
+  ${mixin.flexbox({ dir: 'column', horizontal: 'flex-start', vertical: 'center' })};
+  display: ${({ isClicked }) => (isClicked ? 'flex' : 'none')};
+  width: 240px;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  padding-bottom: 10px;
+  z-index: 10;
+`;
+export const DropdownTitle = styled.div`
+  width: 100%;
+  height: 48px;
+  ${mixin.flexbox({ horizontal: 'flex-start', vertical: 'center' })};
+  ${({ theme }) => theme.fontStyles.textMedium};
+  color: ${({ theme }) => theme.fontColors.gray5};
+  padding: 8px 16px;
+  background: ${({ theme }) => theme.backgroundColors.gray2};
+  border-radius: 16px 16px 0px 0px;
+`;
+export const DropdownContent = styled.div`
+  width: 100%;
+  height: 48px;
+  ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
+  background: ${({ theme }) => theme.backgroundColors.gray1};
+  padding: 8px 16px;
+  color: ${({ theme }) => theme.fontColors.gray5};
+  border-top: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  ${({ theme }) => theme.fontStyles.textSmall};
 `;

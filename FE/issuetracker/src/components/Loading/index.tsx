@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { loginState } from 'context/loginState';
-import { userState } from 'context/userState';
+import * as S from 'components/Loading/styled.index';
+import { loginState } from 'store/loginState';
+import { userState } from 'store/userState';
 
-function Callback() {
+function Loading() {
   const navigate = useNavigate();
   const setLogin = useSetRecoilState(loginState);
   const [userData, setUserData] = useRecoilState(userState);
@@ -35,6 +36,10 @@ function Callback() {
     getToken();
   }, [setLogin, setUserData, userData, navigate, authUri]);
 
-  return <div>Callback</div>;
+  return (
+    <S.spinnerWrapper>
+      <S.spinner />
+    </S.spinnerWrapper>
+  );
 }
-export default Callback;
+export default Loading;

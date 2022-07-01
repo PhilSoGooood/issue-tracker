@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import * as S from 'components/header/styled.index';
-import { userState } from 'context/userState';
+import { userState } from 'store/userState';
 
 function Header() {
   const { profileUrl } = useRecoilValue(userState);

@@ -2,9 +2,12 @@ import * as S from 'components/Issue/styled/index';
 import IssueTitle from 'components/Issue/IssueTitle';
 import IssueDetail from 'components/Issue/IssueDetail';
 import IssueComments from 'components/Issue/IssueCommentSection';
-import IssueSidebar from 'components/Issue/IssueSidebar';
+import { useRecoilValue } from 'recoil';
+import { issueState } from 'store/issue';
+import SideBar from 'components/common/Sidebar';
 
 function Issue() {
+  const issueData = useRecoilValue(issueState);
   return (
     <>
       <IssueTitle />
@@ -12,7 +15,7 @@ function Issue() {
       <S.seperator />
       <S.issueContentWrapper>
         <IssueComments />
-        <IssueSidebar />
+        <SideBar data={issueData} />
       </S.issueContentWrapper>
     </>
   );

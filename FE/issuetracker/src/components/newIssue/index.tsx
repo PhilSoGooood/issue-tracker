@@ -3,8 +3,30 @@ import * as S from 'components/newIssue/styled.index';
 import * as I from 'design/icons';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import SideBar from 'components/common/Sidebar';
+import { useRecoilValue } from 'recoil';
+import { newIssueState } from 'store/newIssue';
+import { usePostData } from 'APIs/Api';
 
 function NewIssue() {
+  const newIssueData = useRecoilValue(newIssueState);
+  const assigneesData: number[] = newIssueData.assignees.map((assignee) => assignee.id);
+  const labelsData: number[] = newIssueData.labels.map((label) => label.id);
+  const data = {
+    title: newIssueData.title,
+    content: newIssueData.comments,
+    writerId: newIssueData.writer.id,
+    assignees: assigneesData,
+    labels: labelsData,
+    milestone: newIssueData.milestone.id,
+  };
+
+  const mutation = usePostData(
+    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issue/new',
+    data,
+  );
+  function postData() {
+    mutation.mutate(data);
+  }
   return (
     <S.NewIssueWrap>
       <S.NewIssueTitle>새로운 이슈 작성</S.NewIssueTitle>
@@ -23,13 +45,19 @@ function NewIssue() {
             </S.AttatchFile>
           </S.InputArea>
         </S.IssueContentLeft>
-        <SideBar />
+        <SideBar data={newIssueData} />
       </S.NewIssueContent>
       <S.UnderLine />
       <S.Buttons>
         <I.cross />
         <S.CancelText>작성 취소</S.CancelText>
-        <S.CompleteBtn>완료</S.CompleteBtn>
+        <S.CompleteBtn
+          onClick={() => {
+            postData();
+          }}
+        >
+          완료
+        </S.CompleteBtn>
       </S.Buttons>
     </S.NewIssueWrap>
   );

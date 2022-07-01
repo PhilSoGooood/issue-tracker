@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import * as S from 'components/Issue/styled/issueCommentSection';
 import IssueComment from 'components/Issue/IssueComment';
 import InputComment from 'components/Issue/InputComment';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 
 function IssueCommentSection() {
   const issueData = useRecoilValue(issueState);
@@ -11,9 +11,9 @@ function IssueCommentSection() {
       {issueData.comments.map((comment) => (
         <IssueComment
           key={comment.writer.id}
-          imageURL={comment.writer.imageUrl}
+          imageURL={comment.writer.profileImage}
           writerName={comment.writer.name}
-          log={comment.log}
+          log={comment.writtenTime}
           description={comment.description}
         />
       ))}

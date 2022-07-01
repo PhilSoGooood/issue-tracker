@@ -56,3 +56,9 @@ export const attachFileButtonText = styled.span`
   ${({ theme }) => theme.fontStyles.linkSSmall};
   margin-left: 8px;
 `;
+
+export const saveButtonWrapper = styled.div`
+  ${mixin.flexbox({ dir: 'row-reverse' })};
+  width: 100%;
+  margin-left: 60px;
+`;

@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 export type LabelType = {
-  id: number;
+  id?: number | undefined;
   title: string;
   color: string;
   description: string;

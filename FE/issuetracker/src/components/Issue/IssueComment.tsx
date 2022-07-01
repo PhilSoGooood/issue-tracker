@@ -1,5 +1,6 @@
 import * as I from 'design/icons';
 import * as S from 'components/Issue/styled/issueComment';
+import { calculateInterval } from 'utils/util';
 
 interface Props {
   imageURL: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function IssueComment({ imageURL, writerName, log, description }: Props) {
+  const interval = calculateInterval(log);
   return (
     <S.commentArticle>
       <S.commentUserImage>
@@ -18,7 +20,7 @@ function IssueComment({ imageURL, writerName, log, description }: Props) {
         <S.commentHeader>
           <S.commentHeaderLeft>
             <S.userName>{writerName}</S.userName>
-            <S.timeStamp>{log}</S.timeStamp>
+            <S.timeStamp>{interval}초 전</S.timeStamp>
           </S.commentHeaderLeft>
           <S.commentHeaderRight>
             <S.writeBadge>작성자</S.writeBadge>
