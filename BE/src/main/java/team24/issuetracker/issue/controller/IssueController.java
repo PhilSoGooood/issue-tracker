@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team24.issuetracker.issue.application.IssueService;
+import team24.issuetracker.issue.domain.dto.IssueEditRequest;
 import team24.issuetracker.issue.domain.dto.IssueListResponse;
-import team24.issuetracker.issue.domain.dto.IssueRequest;
+import team24.issuetracker.issue.domain.dto.IssueAddRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +21,8 @@ public class IssueController {
 	private final IssueService issueService;
 
 	@PostMapping("issue/new")
-	public void writeIssue(@RequestBody IssueRequest issueRequest) {
-		issueService.add(issueRequest);
+	public void writeIssue(@RequestBody IssueAddRequest issueAddRequest) {
+		issueService.add(issueAddRequest);
 	}
 
 	@GetMapping("issues/created-by/{userId}")
@@ -52,5 +53,10 @@ public class IssueController {
 	@PutMapping("issues/{id}/remove")
 	public void removeIssue(@PathVariable("id") Long id) {
 		issueService.delete(id);
+	}
+
+	@PutMapping("issues/{id}/edit")
+	public void editIssue(@PathVariable("id") Long id, @RequestBody IssueEditRequest issueEditRequest) {
+		issueService.edit(id, issueEditRequest);
 	}
 }

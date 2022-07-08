@@ -26,7 +26,7 @@ public class IssueListResponse {
 		this.title = issue.getTitle();
 		this.writer = new IssueListMemberResponse(issue.getWriter());
 		this.writtenTime = issue.getWrittenTime();
-		this.milestone = new IssueListMilestoneResponse(issue.getMilestone());
+		this.milestone = getMilestoneResponse(issue);
 		this.labels = issue.getIssueLabels()
 			.stream()
 			.map(IssueLabel::getLabel)
@@ -38,5 +38,12 @@ public class IssueListResponse {
 			.map(IssueMember::getMember)
 			.map(IssueListMemberResponse::new)
 			.collect(Collectors.toList());
+	}
+
+	private IssueListMilestoneResponse getMilestoneResponse(Issue issue) {
+		if (issue.getMilestone() == null) {
+			return null;
+		}
+		return new IssueListMilestoneResponse(issue.getMilestone());
 	}
 }

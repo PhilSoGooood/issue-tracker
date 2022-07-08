@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team24.issuetracker.issue.domain.dto.IssueEditRequest;
 import team24.issuetracker.issue.domain.reference.IssueLabel;
 import team24.issuetracker.issue.domain.reference.IssueMember;
 import team24.issuetracker.member.domain.Member;
@@ -64,7 +65,7 @@ public class Issue {
 		this.issueLabels = issueLabels;
 	}
 
-	public void changeState() {
+	public void reverseState() {
         this.closed = !this.closed;
 	}
 
@@ -72,4 +73,17 @@ public class Issue {
 		this.deleted = !this.deleted;
 	}
 
+	public void update(IssueEditRequest request, List<IssueMember> assignees, List<IssueLabel> issueLabels, Milestone milestone) {
+		this.title = request.getTitle();
+		this.content = request.getContent();
+		this.milestone = milestone;
+		updateReference(assignees, issueLabels);
+	}
+
+	private void updateReference(List<IssueMember> assignees, List<IssueLabel> issueLabels) {
+		this.getAssignees().clear();
+		this.getAssignees().addAll(assignees);
+		this.getIssueLabels().clear();
+		this.getIssueLabels().addAll(issueLabels);
+	}
 }

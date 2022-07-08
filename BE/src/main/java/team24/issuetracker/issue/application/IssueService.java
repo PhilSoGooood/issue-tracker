@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
 import team24.issuetracker.issue.domain.Issue;
+import team24.issuetracker.issue.domain.dto.IssueEditRequest;
 import team24.issuetracker.issue.domain.dto.IssueListResponse;
+import team24.issuetracker.issue.domain.dto.IssueAddRequest;
 import team24.issuetracker.issue.domain.dto.IssueRequest;
 import team24.issuetracker.issue.domain.reference.IssueLabel;
 import team24.issuetracker.issue.domain.reference.IssueMember;
@@ -62,42 +64,32 @@ public class IssueService {
 			.collect(Collectors.toList());
 	}
 
-	public void add(IssueRequest issueRequest) {
-		Issue issue = create(issueRequest);
-		List<IssueMember> assignees = issueRequest.getAssignees().stream()
-			.map(memberId -> memberRepository.findById(memberId)
-				.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE)))
-			.map(member -> IssueMember.builder().issue(issue).member(member).build())
-			.collect(Collectors.toList());
-
-		List<IssueLabel> labels = issueRequest.getLabels().stream()
-			.map(labelId -> labelRepository.findById(labelId)
-				.orElseThrow(() -> new LabelNotFoundException(LABEL_NOT_FOUND_MESSAGE)))
-			.map(label -> IssueLabel.builder().issue(issue).label(label).build())
-			.collect(Collectors.toList());
+	public void add(IssueAddRequest issueAddRequest) {
+		Issue issue = create(issueAddRequest);
+		List<IssueMember> assignees = getIssueMembers(issueAddRequest, issue);
+		List<IssueLabel> labels = getIssueLabels(issueAddRequest, issue);
 		issue.mappingFields(assignees, labels);
 		issueRepository.save(issue);
 	}
 
-	private Issue create(IssueRequest issueRequest) {
-		Member writer = memberRepository.findById(issueRequest.getWriterId())
-			.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE));
-		if (issueRequest.getMilestone() == null) {
-			Issue issue = issueRequest.toEntity(issueRequest, writer);
-			issueRepository.save(issue);
-			return issue;
+	public void edit(Long id, IssueEditRequest issueEditRequest) {
+		Issue issue = issueRepository.findById(id)
+			.orElseThrow(() -> new IssueNotFoundException(ISSUE_NOT_FOUND_MESSAGE));
+		List<IssueMember> issueMembers = getIssueMembers(issueEditRequest, issue);
+		List<IssueLabel> issueLabels = getIssueLabels(issueEditRequest, issue);
+		Milestone milestone = null;
+		if (issueEditRequest.getMilestone() != null) {
+			milestone = milestoneRepository.findById(issueEditRequest.getMilestone())
+				.orElseThrow(() -> new MilestoneNotFoundException(MILESTONE_NOT_FOUND_MESSAGE));
 		}
-		Milestone milestone = milestoneRepository.findById(issueRequest.getMilestone())
-			.orElseThrow(() -> new MilestoneNotFoundException(MILESTONE_NOT_FOUND_MESSAGE));
-		Issue issue = issueRequest.toEntity(issueRequest, writer, milestone);
+		issue.update(issueEditRequest, issueMembers, issueLabels, milestone);
 		issueRepository.save(issue);
-		return issue;
 	}
 
 	public void updateState(Long id) {
 		Issue issue = issueRepository.findById(id)
 			.orElseThrow(() -> new IssueNotFoundException(ISSUE_NOT_FOUND_MESSAGE));
-		issue.changeState();
+		issue.reverseState();
 		issueRepository.save(issue);
 	}
 
@@ -106,5 +98,36 @@ public class IssueService {
 			.orElseThrow(() -> new IssueNotFoundException(ISSUE_NOT_FOUND_MESSAGE));
 		issue.delete();
 		issueRepository.save(issue);
+	}
+
+	private Issue create(IssueAddRequest issueAddRequest) {
+		Member writer = memberRepository.findById(issueAddRequest.getWriterId())
+			.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE));
+		if (issueAddRequest.getMilestone() == null) {
+			Issue issue = issueAddRequest.toEntity(issueAddRequest, writer);
+			issueRepository.save(issue);
+			return issue;
+		}
+		Milestone milestone = milestoneRepository.findById(issueAddRequest.getMilestone())
+			.orElseThrow(() -> new MilestoneNotFoundException(MILESTONE_NOT_FOUND_MESSAGE));
+		Issue issue = issueAddRequest.toEntity(issueAddRequest, writer, milestone);
+		issueRepository.save(issue);
+		return issue;
+	}
+
+	private List<IssueMember> getIssueMembers(IssueRequest issueRequest, Issue issue) {
+		return issueRequest.getAssignees().stream()
+			.map(memberId -> memberRepository.findById(memberId)
+				.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE)))
+			.map(member -> IssueMember.builder().issue(issue).member(member).build())
+			.collect(Collectors.toList());
+	}
+
+	private List<IssueLabel> getIssueLabels(IssueRequest issueRequest, Issue issue) {
+		return issueRequest.getLabels().stream()
+			.map(labelId -> labelRepository.findById(labelId)
+				.orElseThrow(() -> new LabelNotFoundException(LABEL_NOT_FOUND_MESSAGE)))
+			.map(label -> IssueLabel.builder().issue(issue).label(label).build())
+			.collect(Collectors.toList());
 	}
 }
