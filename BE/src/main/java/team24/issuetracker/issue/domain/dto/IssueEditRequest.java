@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public class IssueEditRequest extends IssueRequest {
 
-	public IssueEditRequest(String title, String content, List<Long> assignees, List<Long> labels, Long milestone) {
-		super(title, content, assignees, labels, milestone);
+	public IssueEditRequest(Long writerId, String title, String content, List<Long> assignees, List<Long> labels,
+		Long milestone) {
+		super(writerId, title, content, assignees, labels, milestone);
 	}
 }
