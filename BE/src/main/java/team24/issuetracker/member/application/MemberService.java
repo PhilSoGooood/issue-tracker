@@ -1,7 +1,8 @@
-package team24.issuetracker.member.service;
+package team24.issuetracker.member.application;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team24.issuetracker.member.domain.Member;
-import team24.issuetracker.member.domain.dto.MemberResponse;
+import team24.issuetracker.member.domain.dto.MemberAddRequest;
 import team24.issuetracker.member.exception.MemberNotFoundException;
 import team24.issuetracker.member.repository.MemberRepository;
+import team24.issuetracker.member.domain.dto.MemberResponse;
 import team24.issuetracker.oauth.dto.GitHubUser;
 
 @Service
@@ -23,7 +25,18 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 
 	@Transactional
-	public Member login(GitHubUser gitHubUser) {
+	public Long add(MemberAddRequest request) {
+		Member newMember = Member.builder()
+			.name(request.getName())
+			.email(request.getEmail())
+			.profileImage(request.getProfileImage())
+			.build();
+		memberRepository.save(newMember);
+		return newMember.getId();
+	}
+
+	@Transactional
+	public Member oauthLogin(GitHubUser gitHubUser) {
 		Member member = memberRepository.findByName(gitHubUser.getName()).orElse(null);
 		log.info("member = {}", member);
 
@@ -58,7 +71,7 @@ public class MemberService {
 	public List<MemberResponse> findMemberResponse() {
 		return memberRepository.findAll()
 			.stream()
-			.map(member -> new MemberResponse(member.getId(),member.getName(),member.getProfileImage()))
+			.map(member -> new MemberResponse(member.getId(), member.getName(), member.getProfileImage()))
 			.collect(Collectors.toList());
 	}
 }

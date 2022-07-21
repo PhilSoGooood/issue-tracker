@@ -15,7 +15,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team24.issuetracker.member.domain.Member;
-import team24.issuetracker.member.service.MemberService;
+import team24.issuetracker.member.application.MemberService;
 import team24.issuetracker.oauth.dto.GitHubAccessToken;
 import team24.issuetracker.oauth.dto.GitHubUser;
 import team24.issuetracker.oauth.dto.LoginMemberResponse;
@@ -45,7 +45,7 @@ public class OAuthController {
 
 		GitHubAccessToken gitHubAccessToken = oAuthService.getAccessToken(code);
 		GitHubUser gitHubUser = oAuthService.getUserInfo(gitHubAccessToken);
-		Member member = memberService.login(gitHubUser);
+		Member member = memberService.oauthLogin(gitHubUser);
 		log.info("member = {}", member);
 
 		String jwtAccessToken = jwtProvider.createAccessToken(member.getId());
