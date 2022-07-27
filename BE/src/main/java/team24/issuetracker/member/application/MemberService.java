@@ -5,15 +5,17 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team24.issuetracker.member.domain.Member;
-import team24.issuetracker.member.domain.dto.MemberAddRequest;
+import team24.issuetracker.member.domain.dto.MemberCreateForm;
+import team24.issuetracker.member.domain.dto.MemberResponse;
 import team24.issuetracker.member.exception.MemberNotFoundException;
 import team24.issuetracker.member.repository.MemberRepository;
-import team24.issuetracker.member.domain.dto.MemberResponse;
 import team24.issuetracker.oauth.dto.GitHubUser;
 
 @Service
@@ -23,11 +25,14 @@ public class MemberService {
 
 	private static final String MEMBER_NOT_FOUND_MESSAGE = "해당 ID를 가진 회원이 존재하지 않습니다.";
 	private final MemberRepository memberRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public Long add(MemberAddRequest request) {
+	public Long create(MemberCreateForm request) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		Member newMember = Member.builder()
 			.name(request.getName())
+			.password(passwordEncoder.encode(request.getPassword()))
 			.email(request.getEmail())
 			.profileImage(request.getProfileImage())
 			.build();

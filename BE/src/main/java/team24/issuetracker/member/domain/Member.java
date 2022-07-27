@@ -1,5 +1,6 @@
 package team24.issuetracker.member.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,12 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(unique = true)
 	private String name;
+
+	private String password;
+
+	@Column(unique = true)
 	private String email;
 	private String profileImage;
 	private String accessToken;
