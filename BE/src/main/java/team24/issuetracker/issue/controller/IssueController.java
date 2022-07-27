@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import team24.issuetracker.issue.application.IssueService;
+import team24.issuetracker.issue.domain.dto.IssueAddRequest;
 import team24.issuetracker.issue.domain.dto.IssueEditRequest;
 import team24.issuetracker.issue.domain.dto.IssueListResponse;
-import team24.issuetracker.issue.domain.dto.IssueAddRequest;
+import team24.issuetracker.member.application.MemberService;
+import team24.issuetracker.member.domain.dto.MemberResponse;
 
 @RestController
 @RequiredArgsConstructor
 public class IssueController {
 
 	private final IssueService issueService;
+	private final MemberService memberService;
 
 	@PostMapping("issue/new")
 	public void writeIssue(@RequestBody IssueAddRequest issueAddRequest) {
@@ -58,5 +62,10 @@ public class IssueController {
 	@PutMapping("issues/{id}/edit")
 	public void editIssue(@PathVariable("id") Long id, @RequestBody IssueEditRequest issueEditRequest) {
 		issueService.edit(id, issueEditRequest);
+	}
+
+	@GetMapping("/assignees")
+	public List<MemberResponse> getAssignees() {
+		return memberService.findMemberResponse();
 	}
 }

@@ -1,14 +1,18 @@
-package team24.issuetracker.member.service;
+package team24.issuetracker.member.application;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team24.issuetracker.member.domain.Member;
+import team24.issuetracker.member.domain.dto.MemberCreateForm;
 import team24.issuetracker.member.domain.dto.MemberResponse;
 import team24.issuetracker.member.exception.MemberNotFoundException;
 import team24.issuetracker.member.repository.MemberRepository;
@@ -21,9 +25,23 @@ public class MemberService {
 
 	private static final String MEMBER_NOT_FOUND_MESSAGE = "해당 ID를 가진 회원이 존재하지 않습니다.";
 	private final MemberRepository memberRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public Member login(GitHubUser gitHubUser) {
+	public Long create(MemberCreateForm request) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		Member newMember = Member.builder()
+			.name(request.getName())
+			.password(passwordEncoder.encode(request.getPassword()))
+			.email(request.getEmail())
+			.profileImage(request.getProfileImage())
+			.build();
+		memberRepository.save(newMember);
+		return newMember.getId();
+	}
+
+	@Transactional
+	public Member oauthLogin(GitHubUser gitHubUser) {
 		Member member = memberRepository.findByName(gitHubUser.getName()).orElse(null);
 		log.info("member = {}", member);
 
@@ -58,7 +76,7 @@ public class MemberService {
 	public List<MemberResponse> findMemberResponse() {
 		return memberRepository.findAll()
 			.stream()
-			.map(member -> new MemberResponse(member.getId(),member.getName(),member.getProfileImage()))
+			.map(member -> new MemberResponse(member.getId(), member.getName(), member.getProfileImage()))
 			.collect(Collectors.toList());
 	}
 }

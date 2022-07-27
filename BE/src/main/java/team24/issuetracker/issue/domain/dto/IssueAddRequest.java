@@ -11,11 +11,9 @@ import team24.issuetracker.milestone.domain.Milestone;
 @Getter
 public class IssueAddRequest extends IssueRequest {
 
-	private final Long writerId;
-
-	public IssueAddRequest(String title, String content, List<Long> assignees, List<Long> labels, Long milestone, Long writerId) {
-		super(title, content, assignees, labels, milestone);
-		this.writerId = writerId;
+	public IssueAddRequest(Long writerId, String title, String content, List<Long> assignees, List<Long> labels,
+		Long milestone) {
+		super(writerId, title, content, assignees, labels, milestone);
 	}
 
 	public Issue toEntity(IssueAddRequest issueAddRequest, Member writer) {

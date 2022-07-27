@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IssueRequest {
 
+	private final Long writerId;
 	private final String title;
 	private final String content;
 	private final List<Long> assignees;
